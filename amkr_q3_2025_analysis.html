@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amkor Technology Q3 2025 財報分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @media print {
+            body {
+                margin: 0;
+                padding: 20px;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .header .date {
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .summary-box h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .metric-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .metric-card .value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .metric-card .change {
+            font-size: 0.85em;
+            margin-top: 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .change.positive {
+            background: rgba(76, 175, 80, 0.3);
+        }
+
+        .change.negative {
+            background: rgba(244, 67, 54, 0.3);
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        section h2::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 30px;
+            background: #667eea;
+            margin-right: 15px;
+            border-radius: 3px;
+        }
+
+        section h3 {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin: 20px 0 15px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        section h3::before {
+            content: '▸';
+            color: #764ba2;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-bottom: 10px;
+        }
+
+        .chart-title {
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        li::before {
+            content: '●';
+            position: absolute;
+            left: 10px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .highlight-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box.warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+
+        .highlight-box.success {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background: #f0f4ff;
+        }
+
+        .positive-text {
+            color: #4caf50;
+            font-weight: 600;
+        }
+
+        .negative-text {
+            color: #f44336;
+            font-weight: 600;
+        }
+
+        .neutral-text {
+            color: #ff9800;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 2px solid #e0e0e0;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @media print {
+            .chart-wrapper {
+                height: 350px;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Amkor Technology (AMKR)</h1>
+            <div class="subtitle">2025年第三季度財報深度分析</div>
+            <div class="date">發佈日期：2025年10月28日 | 分析日期：2025年10月28日</div>
+        </div>
+
+        <div class="summary-box">
+            <h2>📈 核心業績摘要</h2>
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <div class="label">營收</div>
+                    <div class="value">$19.9億</div>
+                    <div class="change positive">環比 +31%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">EPS</div>
+                    <div class="value">$0.51</div>
+                    <div class="change positive">超預期 +19%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">毛利率</div>
+                    <div class="value">14.3%</div>
+                    <div class="change negative">低於預期</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">淨利潤</div>
+                    <div class="value">$1.27億</div>
+                    <div class="change positive">淨利率 6.4%</div>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <h2>📊 財務數據對比分析</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">季度營收趨勢（單位：億美元）</div>
+                <div class="chart-wrapper">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">每股收益(EPS)與預期對比</div>
+                <div class="chart-wrapper">
+                    <canvas id="epsChart"></canvas>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>財務指標</th>
+                        <th>Q3 2025實際</th>
+                        <th>分析師預期</th>
+                        <th>差異</th>
+                        <th>Q2 2025</th>
+                        <th>環比變化</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>營收</strong></td>
+                        <td>$19.9億</td>
+                        <td>$19.3億</td>
+                        <td class="positive-text">+3.1%</td>
+                        <td>$15.1億</td>
+                        <td class="positive-text">+31.8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EPS</strong></td>
+                        <td>$0.51</td>
+                        <td>$0.43</td>
+                        <td class="positive-text">+18.6%</td>
+                        <td>$0.22</td>
+                        <td class="positive-text">+131.8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>毛利潤</strong></td>
+                        <td>$2.84億</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>$1.82億</td>
+                        <td class="positive-text">+56.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>淨利潤</strong></td>
+                        <td>$1.27億</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>$0.54億</td>
+                        <td class="positive-text">+135.2%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EBITDA</strong></td>
+                        <td>$3.40億</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>$2.59億</td>
+                        <td class="positive-text">+31.3%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>🎯 業務結構分析</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">產品組合營收分佈（Q3 2025）</div>
+                <div class="chart-wrapper">
+                    <canvas id="productMixChart"></canvas>
+                </div>
+            </div>
+
+            <div class="highlight-box success">
+                <h3>💪 先進封裝業務表現強勁</h3>
+                <ul>
+                    <li><strong>先進產品營收：$16.8億</strong>（佔總營收84.4%）</li>
+                    <li><strong>主流產品營收：$3.03億</strong>（佔總營收15.6%）</li>
+                    <li>先進封裝技術創下新的營收紀錄</li>
+                    <li>通訊和計算終端市場實現創紀錄營收</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>💰 財務健康狀況</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">資產負債結構（單位：億美元）</div>
+                <div class="chart-wrapper">
+                    <canvas id="balanceSheetChart"></canvas>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>財務健康指標</th>
+                        <th>數值</th>
+                        <th>評估</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>現金及短期投資</td>
+                        <td>$21億</td>
+                        <td class="positive-text">充裕</td>
+                    </tr>
+                    <tr>
+                        <td>總債務</td>
+                        <td>$18億</td>
+                        <td class="positive-text">可控</td>
+                    </tr>
+                    <tr>
+                        <td>流動比率</td>
+                        <td>1.89</td>
+                        <td class="positive-text">健康</td>
+                    </tr>
+                    <tr>
+                        <td>負債權益比</td>
+                        <td>0.43</td>
+                        <td class="positive-text">穩健</td>
+                    </tr>
+                    <tr>
+                        <td>Altman Z-Score</td>
+                        <td>3.14</td>
+                        <td class="positive-text">財務強勁</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h3>💡 資本管理動態</h3>
+                <ul>
+                    <li>2025年10月贖回剩餘$4億的2027年到期優先票據</li>
+                    <li>2025年全年資本支出預測提高至約$9.5億</li>
+                    <li>9月23日支付季度股息$0.08269/股</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <section>
+            <h2>⚖️ 喜憂參半分析</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">利潤率趨勢分析</div>
+                <div class="chart-wrapper">
+                    <canvas id="marginChart"></canvas>
+                </div>
+            </div>
+
+            <div class="highlight-box success">
+                <h3>✅ "喜"的部分 - 表現優異</h3>
+                <ul>
+                    <li><strong>營收大幅超預期：</strong>實際$19.9億 vs 預期$19.3億（+3.1%）</li>
+                    <li><strong>EPS顯著超預期：</strong>實際$0.51 vs 預期$0.43（+18.6%）</li>
+                    <li><strong>環比增長強勁：</strong>營收環比增長31%，創季度新高</li>
+                    <li><strong>先進封裝領先：</strong>先進產品創營收紀錄，佔比84.4%</li>
+                    <li><strong>戰略佈局積極：</strong>亞利桑那$70億園區項目啟動</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box warning">
+                <h3>⚠️ "憂"的部分 - 潛在隱患</h3>
+                <ul>
+                    <li><strong>毛利率被壓縮：</strong>Q3毛利率約14.3%，低於分析師預期</li>
+                    <li><strong>Q4指引保守：</strong>Q4營收指引$17.75-18.75億，中點環比下降約8-9%</li>
+                    <li><strong>淨利率偏低：</strong>淨利率僅6.4%，反映成本壓力</li>
+                    <li><strong>盈利能力承壓：</strong>同比去年Q3的EPS $0.49，增長有限</li>
+                    <li><strong>資本支出高企：</strong>$9.5億資本支出將持續影響現金流</li>
+                    <li><strong>增收不增利：</strong>典型的規模擴張但利潤率犧牲情況</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🔮 第四季度展望</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">Q4 2025 指引對比</div>
+                <div class="chart-wrapper">
+                    <canvas id="q4GuidanceChart"></canvas>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Q4 2025指引</th>
+                        <th>下限</th>
+                        <th>上限</th>
+                        <th>中點</th>
+                        <th>市場預期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>淨銷售額</strong></td>
+                        <td>$17.75億</td>
+                        <td>$18.75億</td>
+                        <td>$18.25億</td>
+                        <td>$18.34億</td>
+                    </tr>
+                    <tr>
+                        <td><strong>毛利率</strong></td>
+                        <td>14.0%</td>
+                        <td>15.0%</td>
+                        <td>14.5%</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>每股收益</strong></td>
+                        <td>$0.38</td>
+                        <td>$0.48</td>
+                        <td>$0.43</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>淨利潤</strong></td>
+                        <td>$0.95億</td>
+                        <td>$1.20億</td>
+                        <td>$1.08億</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h3>📝 特別說明</h3>
+                <ul>
+                    <li>Q4毛利率指引包含約$3000萬的資產出售預期收益</li>
+                    <li>Q4營收中點較Q3環比下降約8.4%，符合季節性規律</li>
+                    <li>EPS指引中點$0.43較Q3的$0.51下降15.7%</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🏗️ 戰略投資與擴張</h2>
+            
+            <div class="highlight-box success">
+                <h3>🚀 亞利桑那園區項目</h3>
+                <ul>
+                    <li><strong>投資規模：</strong>總投資$70億美元</li>
+                    <li><strong>戰略意義：</strong>美國首個大批量先進半導體封裝設施</li>
+                    <li><strong>預計投產：</strong>2028年初開始生產</li>
+                    <li><strong>產業影響：</strong>加強美國本土半導體供應鏈韌性</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>💼 管理層變動</h3>
+                <ul>
+                    <li><strong>CEO交接：</strong>現任CEO Giel Rutten將於2025年底退休</li>
+                    <li><strong>繼任者：</strong>現任COO Kevin Engel於2026年1月1日接任</li>
+                    <li><strong>平穩過渡：</strong>Rutten將繼續擔任董事會成員</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 分析師觀點與市場反應</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">分析師目標價分佈</div>
+                <div class="chart-wrapper">
+                    <canvas id="analystChart"></canvas>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>分析機構</th>
+                        <th>評級</th>
+                        <th>目標價</th>
+                        <th>準確率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DA Davidson</td>
+                        <td class="positive-text">買入</td>
+                        <td>$30</td>
+                        <td>70%</td>
+                    </tr>
+                    <tr>
+                        <td>Needham</td>
+                        <td class="positive-text">買入</td>
+                        <td>$28</td>
+                        <td>69%</td>
+                    </tr>
+                    <tr>
+                        <td>JP Morgan</td>
+                        <td class="positive-text">增持</td>
+                        <td>$27</td>
+                        <td>61%</td>
+                    </tr>
+                    <tr>
+                        <td>B. Riley Securities</td>
+                        <td class="neutral-text">中性</td>
+                        <td>$24</td>
+                        <td>84%</td>
+                    </tr>
+                    <tr>
+                        <td>Morgan Stanley</td>
+                        <td class="neutral-text">持平</td>
+                        <td>$20</td>
+                        <td>75%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box warning">
+                <h3>⚠️ 估值警示</h3>
+                <ul>
+                    <li>財報前股價已達$33，高於分析師平均目標價$26.50</li>
+                    <li>股價過去6個月上漲80%，短期可能存在估值壓力</li>
+                    <li>市盈率27.12倍，處於相對高位</li>
+                    <li>投資者已提前price in樂觀預期</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎯 總結與投資建議</h2>
+            
+            <div class="highlight-box">
+                <h3>📌 核心結論</h3>
+                <p style="line-height: 2; padding: 10px 0;">
+                    Amkor Technology Q3 2025財報呈現<strong class="positive-text">「增收不增利」</strong>的典型特徵。
+                    公司在先進封裝領域取得突破性進展，營收和EPS均超預期，但毛利率壓縮和Q4保守指引反映出
+                    <strong class="negative-text">短期盈利能力承壓</strong>。這是一個在快速擴張期常見的權衡：
+                    <strong>犧牲短期利潤率以換取長期市場份額和戰略地位</strong>。
+                </p>
+            </div>
+
+            <div class="highlight-box success">
+                <h3>✅ 長期投資者視角</h3>
+                <ul>
+                    <li>先進封裝技術領先地位穩固，市場需求強勁</li>
+                    <li>亞利桑那$70億投資展現長期戰略眼光</li>
+                    <li>財務狀況穩健，有能力支撐擴張計劃</li>
+                    <li>在AI和高性能計算浪潮中佔據有利位置</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box warning">
+                <h3>⚠️ 短期投資者風險</h3>
+                <ul>
+                    <li>股價已充分反映樂觀預期，短期回調風險較高</li>
+                    <li>毛利率壓縮趨勢可能持續數季</li>
+                    <li>Q4環比下降，季節性因素需要考慮</li>
+                    <li>高資本支出將持續影響自由現金流</li>
+                </ul>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">投資評分雷達圖</div>
+                <div class="chart-wrapper">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p><strong>資料來源：</strong>Amkor Technology 2025年第三季度財報（2025年10月28日發佈）</p>
+            <p style="margin-top: 10px;">本分析報告僅供參考，不構成投資建議。投資有風險，決策需謹慎。</p>
+            <p style="margin-top: 10px; color: #667eea;">© 2025 財報分析報告 | 生成時間：2025年10月28日</p>
+        </div>
+    </div>
+
+    <script>
+        // 設置Chart.js默認配置
+        Chart.defaults.font.family = "'Segoe UI', 'Microsoft YaHei', Arial, sans-serif";
+        Chart.defaults.font.size = 12;
+        Chart.defaults.color = '#666';
+
+        // 1. 季度營收趨勢圖
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025 (指引)'],
+                datasets: [{
+                    label: '營收（億美元）',
+                    data: [14.5, 15.1, 19.9, 18.25],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.7)',
+                        'rgba(102, 126, 234, 0.7)',
+                        'rgba(76, 175, 80, 0.7)',
+                        'rgba(255, 152, 0, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(255, 152, 0, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + context.parsed.y + '億';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + '億';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. EPS對比圖
+        const epsCtx = document.getElementById('epsChart').getContext('2d');
+        new Chart(epsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 2025', 'Q2 2025', 'Q3 2025 預期', 'Q3 2025 實際', 'Q4 2025 指引'],
+                datasets: [{
+                    label: 'EPS ($)',
+                    data: [0.18, 0.22, 0.43, 0.51, 0.43],
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: [
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(255, 152, 0, 1)',
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(255, 152, 0, 1)'
+                    ],
+                    pointBorderWidth: 2,
+                    pointBorderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'EPS: $' + context.parsed.y;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 3. 產品組合圖
+        const productMixCtx = document.getElementById('productMixChart').getContext('2d');
+        new Chart(productMixCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['先進產品', '主流產品'],
+                datasets: [{
+                    data: [16.8, 3.03],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(118, 75, 162, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return label + ': $' + value + '億 (' + percentage + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. 資產負債結構圖
+        const balanceSheetCtx = document.getElementById('balanceSheetChart').getContext('2d');
+        new Chart(balanceSheetCtx, {
+            type: 'bar',
+            data: {
+                labels: ['現金及短期投資', '總債務', '淨現金位置'],
+                datasets: [{
+                    label: '金額（億美元）',
+                    data: [21, 18, 3],
+                    backgroundColor: [
+                        'rgba(76, 175, 80, 0.7)',
+                        'rgba(244, 67, 54, 0.7)',
+                        'rgba(102, 126, 234, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(244, 67, 54, 1)',
+                        'rgba(102, 126, 234, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.x + '億';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + '億';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. 利潤率趨勢圖
+        const marginCtx = document.getElementById('marginChart').getContext('2d');
+        new Chart(marginCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 2025', 'Q2 2025', 'Q3 2025', 'Q4 2025 (指引)'],
+                datasets: [
+                    {
+                        label: '毛利率 (%)',
+                        data: [11.5, 12.0, 14.3, 14.5],
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: '淨利率 (%)',
+                        data: [3.1, 3.6, 6.4, 5.9],
+                        borderColor: 'rgba(76, 175, 80, 1)',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 6. Q4指引對比圖
+        const q4GuidanceCtx = document.getElementById('q4GuidanceChart').getContext('2d');
+        new Chart(q4GuidanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q4營收指引下限', 'Q4營收指引上限', 'Q4營收市場預期', 'Q3實際營收'],
+                datasets: [{
+                    label: '營收（億美元）',
+                    data: [17.75, 18.75, 18.34, 19.9],
+                    backgroundColor: [
+                        'rgba(255, 152, 0, 0.6)',
+                        'rgba(255, 152, 0, 0.8)',
+                        'rgba(102, 126, 234, 0.7)',
+                        'rgba(76, 175, 80, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 152, 0, 1)',
+                        'rgba(255, 152, 0, 1)',
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(76, 175, 80, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y + '億';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value + '億';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 7. 分析師目標價圖
+        const analystCtx = document.getElementById('analystChart').getContext('2d');
+        new Chart(analystCtx, {
+            type: 'bar',
+            data: {
+                labels: ['DA Davidson', 'Needham', 'JP Morgan', 'B. Riley', 'Morgan Stanley', '當前股價'],
+                datasets: [{
+                    label: '目標價 ($)',
+                    data: [30, 28, 27, 24, 20, 33],
+                    backgroundColor: [
+                        'rgba(76, 175, 80, 0.7)',
+                        'rgba(76, 175, 80, 0.7)',
+                        'rgba(76, 175, 80, 0.7)',
+                        'rgba(255, 152, 0, 0.7)',
+                        'rgba(255, 152, 0, 0.7)',
+                        'rgba(244, 67, 54, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(255, 152, 0, 1)',
+                        'rgba(255, 152, 0, 1)',
+                        'rgba(244, 67, 54, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '目標價: $' + context.parsed.y;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 8. 投資評分雷達圖
+        const radarCtx = document.getElementById('radarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['營收增長', '盈利能力', '財務健康', '估值水平', '技術領先', '戰略前景'],
+                datasets: [{
+                    label: 'Amkor Q3 2025評分',
+                    data: [9, 6, 8, 5, 9, 8],
+                    backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            stepSize: 2
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
